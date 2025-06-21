@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.natanti.dscatalog.dto.CategoryDTO;
 import com.natanti.dscatalog.entities.Category;
 import com.natanti.dscatalog.repositories.CategoryRepository;
-import com.natanti.dscatalog.services.exceptions.EntityNotFoundException;
+import com.natanti.dscatalog.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
@@ -40,6 +42,18 @@ public class CategoryService {
 		cat.setName(dto.getName());
 		cat = repository.save(cat);
 		return new CategoryDTO(cat);
+	}
+
+	@Transactional
+	public CategoryDTO update(Long id, CategoryDTO dto) {
+		try {
+			Category existing = repository.getReferenceById(id);
+			existing.setName(dto.getName());
+			existing = repository.save(existing);
+			return new CategoryDTO(existing);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id não encontrado: " + id);
+		}
 	}
 	
 	
