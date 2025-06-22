@@ -9,12 +9,9 @@ import java.util.Set;
 import com.natanti.dscatalog.entities.Category;
 import com.natanti.dscatalog.entities.Product;
 
-import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
 @Data
 @NoArgsConstructor
 public class ProductDTO implements Serializable{
