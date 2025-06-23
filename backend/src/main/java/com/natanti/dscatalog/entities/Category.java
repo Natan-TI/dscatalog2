@@ -45,5 +45,10 @@ public class Category implements Serializable{
 	public void preUpdate() {
 		updatedAt = Instant.now();
 	}
-	
+
+	public Category(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 }
